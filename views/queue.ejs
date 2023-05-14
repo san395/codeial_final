@@ -1,0 +1,143 @@
+<head>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+   *{
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+    }
+    li{
+        padding: 0px;
+    }
+    ul{
+        text-decoration: none;
+        list-style-type: none;
+    }
+    #feed-posts{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 45%;
+        min-width: 350px;
+        max-width: 600px;
+        margin: auto;
+        margin-top: 50px;
+    }
+    .post-comment form input[type="submit"]{
+        padding: 5px;
+        font-size: 15px;
+        font-weight: bold;
+        border-radius: 5px;
+        background: #4070f4;
+        color: black;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .post-comment form input[type="submit"]:hover{
+        transition: all 0.3s ease;
+        cursor:pointer;
+    }
+    #createpost{
+        width:100%;
+        background-color: #f1f1f1;
+        margin-bottom: 30px;
+        padding: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        height: auto;
+        border: 3px solid #4070f4;
+        border-radius: 10px;
+    }
+
+    #createpost form input[type="submit"]{
+        padding: 5px;
+        font-size: 15px;
+        font-weight: bold;
+        border-radius: 5px;
+        background: #4070f4;
+        color: black;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    #createpost form input[type="submit"]:hover{
+        transition: all 0.3s ease;
+        cursor:pointer;
+    }
+    #posts-list-container{
+        width:100%;
+        height:auto;
+    }
+    #posts-list-container>ul>li{
+        border: 3px solid #4070f4;
+        display:inline-block;
+        background: #353333;
+        color: white;
+        border-radius: 10px;
+        margin-bottom: 30px;
+        padding: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        width: 100%;
+        height:auto;
+    }
+    .post-comments-list ul small{
+        color: #4070f4
+    }
+    .post-comments-list ul p{
+        font-size: 15px;
+    }
+    small{
+        font-size: 12px;
+        color:#4070f4;
+    }
+    @media (max-width: 850px) {
+        #feed-posts{
+            width: 95%;
+        }
+    }
+</style>
+<section id="feed-posts">
+    <div id="createpost">
+    <form action="/posts/create" id="new-post-form" method="POST">
+        <textarea name="content" cols="30" rows="3" placeholder="What's on your mind?" id="textar"></textarea>
+        <input type="submit" value="Post">
+        <input type="hidden" name="topic" value="queue">
+    </form>
+    </div>
+    <div id="posts-list-container">
+        <ul>
+            <% for(post of posts) { %>
+                <li>
+                    <small>
+                        <%= post.user.name %>
+                    </small>
+                    <br>
+                    <p>
+                    <%=post.content %>
+                    
+                    </p>
+                <div class="post-comment">
+                    <form action="/comments/create"  method="POST">
+                        <input type="text" name="content" placeholder="Type here to add Comment...">
+                        <br>
+                        <input type="hidden" name="post" value="<%= post._id %>">
+                        <input type="submit" value="add Comment" >
+                    </form>
+                </div>
+                    <div class="post-comments-list">
+                        <ul id="post-comments-<%=post._id %>">
+                            <% for (comment of post.comments){%>
+                                <small>
+                                    <%= comment.user.name%>
+                                </small>
+                                <p><%= comment.content%></p>
+                                <%}%>
+                        </ul>
+                    
+                </div>
+                </li>
+             <%}%>   
+        </ul>
+    </div>
+ </section>

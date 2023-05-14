@@ -1,0 +1,21 @@
+const express=require('express');
+const router =express.Router();
+const homecontroller =require('../controllers/home_controllers');
+const recursion =require('../controllers/recursion_controllers');
+const graph =require('../controllers/graph_controllers');
+const trie =require('../controllers/trie_controllers');
+const tree =require('../controllers/tree_controllers');
+const stack =require('../controllers/stack_controllers');
+const queue =require('../controllers/queue_controllers');
+router.get('/',homecontroller.home);
+router.get('/recursion',recursion.home);
+router.get('/stack',stack.home);
+router.get('/queue',queue.home);
+router.get('/trie',trie.home);
+router.get('/graph',graph.home);
+router.get('/tree',tree.home);
+router.use('/users',require('./users'));
+router.use('/posts',require('./posts'));
+router.use('/comments',require('./comments'));
+
+module.exports=router;

@@ -1,0 +1,47 @@
+
+
+      <head>
+        <meta charset="utf-8">
+       <!--------- <title>Responsive Navigation Menu</title>------>
+        <link rel="stylesheet" href="css/header.css" type="text/css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      </head>
+      <body>
+        <nav>
+          <div class="logo">Codeial</div>
+          <input type="checkbox" id="click">
+          <label for="click" class="menu-btn">
+            <i class="fas fa-bars"></i>
+          </label>
+          <ul>
+            <li>
+              <div class="dropdown">
+                <a href="#" class="dropbtn">Topics</a>
+                <div class="dropdown-content">
+                  <a href="/recursion">Recursion</a>
+                  <a href="/tree">Trees</a>
+                  <a href="/stack">Stacks</a>
+                  <a href="/queue">Queues</a>
+                  <a href="/graph">Graphs</a>
+                  <a href="trie">Tries</a>
+                </div>
+              </div>
+            </li>
+            <% if(!locals.user){%>
+              <li><a href="/">Home</a></li>
+              <li><a href="/users/signin">Sign In</a></li>
+           <li><a href="/users/signup">Sign Up</a></li>
+           
+           <%}%>
+           <% if(locals.user){%>
+            <li><a href="/" >Home</a></li>
+            <li><a href="/users/signout">Sign Out</a></li>
+         <li><a href="/users/profile">Profile</a></li>
+         
+         <%}%>
+      
+          </ul>
+        </nav>
+      </body>
+    </html>
